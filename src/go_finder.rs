@@ -1,12 +1,12 @@
 use std::env;
 use std::env::var;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
-pub enum FindError {
+pub enum FinderError {
     #[error("Could not determine user home directory")]
     HomeDir,
     #[error("I/o error: {0}")]
@@ -21,7 +21,7 @@ pub struct GoInstallation {
     pub path_to_delete: PathBuf,
 }
 
-pub fn find_go_installations() -> Result<GoInstallation, FindError> {
+pub fn find_go_installations() -> Result<GoInstallation, FinderError> {
     let mut versions = Vec::new();
     let mut search_paths = Vec::new();
 
@@ -47,7 +47,7 @@ pub fn find_go_installations() -> Result<GoInstallation, FindError> {
     let go_path = search_paths.into_iter().find(|p| p.exists() && p.is_dir());
     let path_to_delete = match go_path {
         Some(path) => path,
-        None => return Err(FindError::NotFound),
+        None => return Err(FinderError::NotFound),
     };
 
     if path_to_delete.exists() {
@@ -58,8 +58,9 @@ pub fn find_go_installations() -> Result<GoInstallation, FindError> {
             }
         }
     }
-    // home crate api is not intended for external use
+    //  ------ Check for GVM (Go Version Manager) installations ------ //
     if let Some(home_dir) = home::home_dir() {
+        //home crate api is not intended for external use
         let gvm_path = home_dir.join(".gvm").join("gos");
         if gvm_path.exists() {
             if let Ok(entries) = fs::read_dir(gvm_path) {
@@ -77,7 +78,7 @@ pub fn find_go_installations() -> Result<GoInstallation, FindError> {
     }
 
     if versions.is_empty() {
-        Err(FindError::NotFound)
+        Err(FinderError::NotFound)
     } else {
         Ok(GoInstallation {
             versions,
