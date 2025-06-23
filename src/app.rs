@@ -31,6 +31,8 @@ pub struct App {
 }
 
 impl App {
+    /// Creates a new App instance and starts an asynchronous task to find Go installations.
+    /// The task will send a GoFound message when complete.
     pub fn new(sender: mpsc::Sender<AppMessage>) -> Self {
         // Kickoff a background(async) task to find go installations
         tokio::spawn(async move {
@@ -49,10 +51,14 @@ impl App {
         }
     }
 
+    /// Updates the spinner animation frame for the loading state.
+    /// Called on each tick to animate the loading spinner.
     pub fn on_tick(&mut self) {
         self.spinner_frame = (self.spinner_frame + 1) % 8;
     }
 
+    /// Handles incoming messages from background tasks and updates the app state accordingly.
+    /// Processes GoFound and GoDeleted messages, updating the UI state and error messages.
     pub fn handle_message(&mut self, msg: AppMessage) {
         match msg {
             AppMessage::GoFound(Ok(installation)) => {
@@ -79,6 +85,9 @@ impl App {
         }
     }
 
+    /// Initiates the deletion process if the user input is "yes" (case-insensitive).
+    /// Starts an asynchronous deletion task and transitions to the Deleting state.
+    /// If the input is not "yes", sets should_quit to true to exit the application.
     pub fn start_deletion(&mut self, sender: mpsc::Sender<AppMessage>) {
         if self.input.to_lowercase() == "yes" {
             self.state = AppState::Deleting;

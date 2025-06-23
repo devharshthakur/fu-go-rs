@@ -42,6 +42,7 @@ pub fn find_go_installations() -> Result<GoInstallation, FinderError> {
     {
         search_paths.push(PathBuf::from("/usr/local/go"));
         search_paths.push(PathBuf::from("/usr/local/Cellar/go"));
+        search_paths.push(PathBuf::from("/opt/homebrew/Cellar/go"));
     }
 
     let go_path = search_paths.into_iter().find(|p| p.exists() && p.is_dir());
