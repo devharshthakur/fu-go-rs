@@ -1,6 +1,8 @@
 [package]
 name = "fu-go-rs"
-version = "0.1.0"
+version = "1.0.0-beta"
+description = "Go uninstaller implemented in rust"
+license = "MIT"
 edition = "2021"
 
 [dependencies]
