@@ -3,7 +3,7 @@
 ⚠️ **DISCLAIMER** ⚠️  
 **USE AT YOUR OWN RISK!** This tool will attempt to remove Go installations from your system, which could potentially cause issues or remove files you didn't intend to delete. The authors are not responsible for any damage, data loss, or system issues that may result from using this software. Please ensure you have backups and understand the risks before proceeding.
 
-![Screenshot](demo_screenshot.png)
+![Screenshot](./assets/demo_screenshot.png)
 
 
 ## 🎯 About
