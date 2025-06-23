@@ -1,7 +1,8 @@
 # FU-GO-RS 🦀 - Go Uninstaller (Rust Implementation)
 
-⚠️ **DISCLAIMER** ⚠️  
-**USE AT YOUR OWN RISK!** This tool will attempt to remove Go installations from your system, which could potentially cause issues or remove files you didn't intend to delete. The authors are not responsible for any damage, data loss, or system issues that may result from using this software. Please ensure you have backups and understand the risks before proceeding.
+⚠️ **USE AT YOUR OWN RISK!** 
+
+ This tool will attempt to remove Go installations from your system, which could potentially cause issues or remove files you didn't intend to delete. The authors are not responsible for any damage, data loss, or system issues that may result from using this software. Please ensure you have backups and understand the risks before proceeding.
 
 ![Screenshot](./assets/demo_screenshot.png)
 
@@ -75,10 +76,10 @@ cargo run
 ### Controls
 
 - **Type text**: Enter confirmation text
-- **ENTER**: Confirm action (when in confirmation state)
-- **q/ESC**: Quit the application
-- **Ctrl+C**: Force quit
-- **Backspace**: Delete characters in input field
+- **`ENTER`**: Confirm action (when in confirmation state)
+- **`q/ESC`**: Quit the application
+- **`Ctrl+C`**: Force quit
+- **`Backspace`**: Delete characters in input field
 
 ## 🔍 Detection Strategy
 
