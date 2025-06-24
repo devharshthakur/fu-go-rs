@@ -26,11 +26,11 @@ pub fn render(frame: &mut Frame, app: &App) {
     let main_layout = Layout::default()
         .direction(Direction::Vertical)
         .constraints([
-            Constraint::Length(9),
+            Constraint::Length(10),
             Constraint::Length(2),
             Constraint::Min(0),
         ])
-        .split(frame.size());
+        .split(frame.area());
     render_logo(frame, main_layout[0]);
     render_subtitle(frame, main_layout[1]);
 
@@ -57,7 +57,7 @@ fn render_logo(frame: &mut Frame, area: Rect) {
 ██╔══╝  ██║   ██║     ██║   ██║██║   ██║
 ██║     ╚██████╔╝     ╚██████╔╝╚██████╔╝
 ╚═╝      ╚═════╝       ╚═════╝  ╚═════╝ 
-"; // The big FUGO text
+"; 
     let mut spans = Vec::new();
     for line in logo_text.lines() {
         let mut line_spans = Vec::new();
